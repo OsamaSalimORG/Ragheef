@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Raghif - Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@400;500;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', 'Tahoma', sans-serif;
+            background-color: #f5f1e8;
+            color: #3d2817;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-weight: 700;
+        }
+
+        .font-arabic {
+            font-family: 'Cairo', 'Arial', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e0d8;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #8B5A2B;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 0.875rem;
+            color: #888;
+        }
+
+        .language-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 1.5rem;
+            background-color: #8B5A2B;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+
+        .language-toggle:hover {
+            background-color: #6d4620;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 120px;
+            z-index: 40;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e0d8;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            padding: 1rem 0;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-button {
+            background-color: transparent;
+            border: 1px solid #d4cfc5;
+            color: #3d2817;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .nav-button:hover {
+            background-color: #8B5A2B;
+            color: white;
+            border-color: #8B5A2B;
+        }
+
+        .nav-button.active {
+            background-color: #8B5A2B;
+            color: white;
+            border-color: #8B5A2B;
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+        }
+
+        .menu-section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 250px;
+        }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.875rem;
+            color: #8B5A2B;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(to right, #8B5A2B, #CD7F32);
+            border-radius: 9999px;
+            width: 96px;
+        }
+
+        /* Menu Table */
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 0.375rem;
+            overflow: hidden;
+        }
+
+        .menu-table thead {
+            background-color: #f5f1e8;
+            border-bottom: 2px solid #8B5A2B;
+        }
+
+        .menu-table th {
+            padding: 1rem;
+            text-align: left;
+            color: #8B5A2B;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .menu-table th:last-child {
+            text-align: right;
+        }
+
+        .menu-table tbody tr {
+            border-bottom: 1px solid #e5e0d8;
+            transition: background-color 0.2s;
+        }
+
+        .menu-table tbody tr:hover {
+            background-color: #faf8f4;
+        }
+
+        .menu-table tbody tr:nth-child(even) {
+            background-color: #fdfcfa;
+        }
+
+        .menu-table td {
+            padding: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .menu-table td:last-child {
+            text-align: right;
+            color: #8B5A2B;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #e5e0d8;
+            background-color: #fff;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: #888;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .language-toggle {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.375rem 0.75rem;
+                font-size: 0.75rem;
+            }
+
+            .nav-content {
+                gap: 0.25rem;
+            }
+
+            .nav-button {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.75rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .menu-table {
+                font-size: 0.875rem;
+            }
+
+            .menu-table th,
+            .menu-table td {
+                padding: 0.75rem;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 id="title">مطعم رغيف</h1>
+                <p class="subtitle font-arabic" id="subtitle">قائمة الطعام الشاملة</p>
+                <button class="language-toggle" onclick="toggleLanguage()">English</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content" id="nav-content"></div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div id="menu-content"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text font-arabic" id="footer-text">© 2024 مطعم رغيف. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Data
+        const menuData = [
+            {
+                id: "lahm-bi-ajeen",
+                titleAr: "لحم بعجين",
+                titleEn: "Lahm Bi Ajeen",
+                items: [
+                    { id: "iraqi-lahm", nameAr: "لحم بعجين عراقي", nameEn: "Iraqi Lahm Bi Ajeen", price: 5.0 },
+                    { id: "lahm-with-egg", nameAr: "لحم بعجين مع بيض", nameEn: "Lahm Bi Ajeen with Egg", price: 6.0 },
+                    { id: "turkish-lahm", nameAr: "لحم بعجين تركي", nameEn: "Turkish Lahm Bi Ajeen", price: 6.0 }
+                ]
+            },
+            {
+                id: "appetizers",
+                titleAr: "المقبلات",
+                titleEn: "Appetizers",
+                items: [
+                    { id: "hummus", nameAr: "حمص", nameEn: "Hummus", price: 2.0 },
+                    { id: "moutabal", nameAr: "متبل بابا غنوج", nameEn: "Moutabal (Baba Ghanoush)", price: 2.0 },
+                    { id: "baghdadi-salad", nameAr: "سلطة بغدادية", nameEn: "Baghdadi Salad", price: 3.0 },
+                    { id: "tzatziki", nameAr: "جاجيك", nameEn: "Tzatziki", price: 3.0 },
+                    { id: "tabbouleh", nameAr: "تبولة", nameEn: "Tabbouleh", price: 3.0 },
+                    { id: "mixed-appetizers-medium", nameAr: "مشكل حجم وسط", nameEn: "Mixed Appetizers (Medium)", price: 5.0 },
+                    { id: "mixed-appetizers-large", nameAr: "مشكل حجم كبير", nameEn: "Mixed Appetizers (Large)", price: 8.0 }
+                ]
+            },
+            {
+                id: "oriental-dishes",
+                titleAr: "الشرقيات",
+                titleEn: "Oriental Dishes",
+                items: [
+                    { id: "lamb-quzi", nameAr: "قوزي لحم", nameEn: "Lamb Quzi", price: 18.0 },
+                    { id: "shami-quzi", nameAr: "قوزي الشام", nameEn: "Shami Quzi", price: 13.0 },
+                    { id: "half-chicken-rice", nameAr: "نصف دجاج على تمن", nameEn: "Half Chicken with Rice", price: 12.0 },
+                    { id: "whole-chicken-rice", nameAr: "دجاجة على تمن", nameEn: "Whole Chicken with Rice", price: 18.0 },
+                    { id: "pulled-chicken-rice", nameAr: "دجاج مسحب على تمن", nameEn: "Pulled chicken on rice", price: 12.0 },
+                    { id: "assyrian-meat", nameAr: "لحمة آشورية", nameEn: "Assyrian meat", price: 20.0 },
+                    { id: "quzi-frikeh", nameAr: "قوزي فريكة (قره خرمان)", nameEn: "Quzi Frikeh", price: 20.0 },
+                    { id: "sauteed-lamb", nameAr: "قلية ناشف على تمن", nameEn: "Sauteed Lamb", price: 12.0 }
+                ]
+            },
+            {
+                id: "pizza",
+                titleAr: "البيتزا",
+                titleEn: "Pizza",
+                items: [
+                    { id: "chicken-pizza", nameAr: "بيتزا دجاج", nameEn: "Chicken Pizza", price: 12.0 },
+                    { id: "meat-pizza", nameAr: "بيتزا لحم", nameEn: "Meat Pizza", price: 13.0 },
+                    { id: "pepperoni-pizza", nameAr: "بيتزا بيبيروني", nameEn: "Pepperoni pizza", price: 12.0 }
+                ]
+            },
+            {
+                id: "chicken",
+                titleAr: "الدجاج",
+                titleEn: "Chicken",
+                items: [
+                    { id: "grilled-chicken-whole", nameAr: "دجاجة مشوية على المحفل", nameEn: "Grilled Chicken (Whole)", price: 14.0 },
+                    { id: "grilled-chicken-half", nameAr: "نصف دجاجة مشوية على المحفل", nameEn: "Grilled Chicken (Half)", price: 8.0 },
+                    { id: "pulled-chicken", nameAr: "دجاج مسحب على المحفل", nameEn: "Pulled chicken", price: 8.0 }
+                ]
+            },
+            {
+                id: "grills",
+                titleAr: "المشويات",
+                titleEn: "Grills",
+                items: [
+                    { id: "kebab-1skewer", nameAr: "كباب واحد شيش", nameEn: "Kebab (1 skewer)", price: 5.0 },
+                    { id: "lamb-tikka-1skewer", nameAr: "تكة لحم واحد شيش", nameEn: "Lamb Tikka (1 skewer)", price: 6.0 },
+                    { id: "kebab-hanging-1skewer", nameAr: "معلق واحد شيش", nameEn: "Kebab (1 skewer)", price: 6.0 },
+                    { id: "chicken-tikka-1skewer", nameAr: "تكة دجاج واحد شيش", nameEn: "Chicken Tikka (1 skewer)", price: 5.0 },
+                    { id: "chicken-wings-1skewer", nameAr: "جناح دجاج واحد شيش", nameEn: "Chicken Wings (1 skewer)", price: 5.0 },
+                    { id: "kebab-plate-3skewers", nameAr: "نفر كباب ثلاثة شيش", nameEn: "Kebab Plate (3 skewers)", price: 14.0 },
+                    { id: "lamb-tikka-plate", nameAr: "نفر تكة لحم", nameEn: "Lamb Tikka Plate", price: 16.0 },
+                    { id: "mixed-grill", nameAr: "نفر مشكل", nameEn: "Mixed Grill", price: 15.0 },
+                    { id: "mixed-meat-grill", nameAr: "نفر مشكل موحل", nameEn: "Mixed Meat Grill", price: 16.0 },
+                    { id: "lamb-ribs", nameAr: "ضلوع غنم", nameEn: "Lamb Ribs", price: 22.0 },
+                    { id: "arayes", nameAr: "عرايس", nameEn: "Arayes", price: 10.0 },
+                    { id: "steak", nameAr: "ستيك لحم", nameEn: "Steak", price: 18.0 },
+                    { id: "rocky-mountain-oysters", nameAr: "بيض غنم واحد شيش", nameEn: "Rocky Mountain oysters", price: 6.0 }
+                ]
+            },
+            {
+                id: "drinks",
+                titleAr: "المشروبات",
+                titleEn: "Drinks",
+                items: [
+                    { id: "bottled-drinks", nameAr: "مشروبات زجاجية", nameEn: "Bottled Drinks", price: 1.0 },
+                    { id: "soft-drink", nameAr: "مشروبات غازية", nameEn: "Soft Drink", price: 0.75 },
+                    { id: "yogurt-drink", nameAr: "لبن", nameEn: "Yogurt Drink", price: 1.0 },
+                    { id: "tea", nameAr: "شاي", nameEn: "Tea", price: 0.5 }
+                ]
+            }
+        ];
+
+        let language = 'ar';
+
+        function toggleLanguage() {
+            language = language === 'ar' ? 'en' : 'ar';
+            renderMenu();
+            updateHeader();
+        }
+
+        function updateHeader() {
+            const titleEl = document.getElementById('title');
+            const subtitleEl = document.getElementById('subtitle');
+            const toggleBtn = document.querySelector('.language-toggle');
+            const footerEl = document.getElementById('footer-text');
+
+            if (language === 'ar') {
+                titleEl.textContent = 'مطعم رغيف';
+                subtitleEl.textContent = 'قائمة الطعام الشاملة';
+                subtitleEl.className = 'subtitle font-arabic';
+                toggleBtn.textContent = 'English';
+                footerEl.textContent = '© 2024 مطعم رغيف. جميع الحقوق محفوظة.';
+                footerEl.className = 'footer-text font-arabic';
+            } else {
+                titleEl.textContent = 'Restaurant Raghif';
+                subtitleEl.textContent = 'Complete Menu';
+                subtitleEl.className = 'subtitle';
+                toggleBtn.textContent = 'العربية';
+                footerEl.textContent = '© 2024 Restaurant Raghif. All rights reserved.';
+                footerEl.className = 'footer-text';
+            }
+        }
+
+        function renderMenu() {
+            const menuContent = document.getElementById('menu-content');
+            const navContent = document.getElementById('nav-content');
+
+            menuContent.innerHTML = '';
+            navContent.innerHTML = '';
+
+            // Render navigation
+            menuData.forEach(category => {
+                const navBtn = document.createElement('button');
+                navBtn.className = 'nav-button';
+                navBtn.textContent = language === 'ar' ? category.titleAr : category.titleEn;
+                navBtn.onclick = () => {
+                    document.getElementById(category.id).scrollIntoView({ behavior: 'smooth' });
+                };
+                navContent.appendChild(navBtn);
+            });
+
+            // Render menu sections
+            menuData.forEach(category => {
+                const section = document.createElement('div');
+                section.id = category.id;
+                section.className = 'menu-section';
+
+                const header = document.createElement('div');
+                header.className = 'section-header';
+
+                const title = document.createElement('h2');
+                title.className = `section-title ${language === 'ar' ? 'font-arabic' : ''}`;
+                title.textContent = language === 'ar' ? category.titleAr : category.titleEn;
+
+                const divider = document.createElement('div');
+                divider.className = 'section-divider';
+
+                header.appendChild(title);
+                header.appendChild(divider);
+                section.appendChild(header);
+
+                // Create table
+                const table = document.createElement('table');
+                table.className = 'menu-table';
+
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+
+                const th1 = document.createElement('th');
+                th1.className = language === 'ar' ? 'font-arabic' : '';
+                th1.textContent = language === 'ar' ? 'الصنف (العربية)' : 'Item (Arabic)';
+
+                const th2 = document.createElement('th');
+                th2.className = language === 'ar' ? 'font-arabic' : '';
+                th2.textContent = language === 'ar' ? 'الصنف (الإنجليزية)' : 'Item (English)';
+
+                const th3 = document.createElement('th');
+                th3.className = language === 'ar' ? 'font-arabic' : '';
+                th3.textContent = language === 'ar' ? 'السعر' : 'Price';
+
+                headerRow.appendChild(th1);
+                headerRow.appendChild(th2);
+                headerRow.appendChild(th3);
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+
+                // Create tbody
+                const tbody = document.createElement('tbody');
+                category.items.forEach((item, index) => {
+                    const row = document.createElement('tr');
+
+                    const td1 = document.createElement('td');
+                    td1.className = 'font-arabic';
+                    td1.textContent = item.nameAr;
+
+                    const td2 = document.createElement('td');
+                    td2.textContent = item.nameEn;
+
+                    const td3 = document.createElement('td');
+                    td3.textContent = item.price.toFixed(3);
+
+                    row.appendChild(td1);
+                    row.appendChild(td2);
+                    row.appendChild(td3);
+                    tbody.appendChild(row);
+                });
+
+                table.appendChild(tbody);
+                section.appendChild(table);
+                menuContent.appendChild(section);
+            });
+        }
+
+        // Initialize
+        renderMenu();
+        updateHeader();
+    </script>
+</body>
+</html>
